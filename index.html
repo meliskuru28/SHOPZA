@@ -1,0 +1,5316 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHOPZA</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f7f7f7;
+    color:#333;
+}
+
+button{
+    font-family:inherit;
+}
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================
+   ÜST BAR
+========================= */
+
+.ust-bar{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    min-height:72px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:12px 5%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#f35b9b;
+    font-size:29px;
+    font-weight:900;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+.arama-alani{
+    flex:1;
+    max-width:650px;
+    display:flex;
+}
+
+#arama{
+    width:100%;
+    height:43px;
+    padding:0 18px;
+    border:1px solid #ddd;
+    border-right:none;
+    border-radius:7px 0 0 7px;
+    outline:none;
+    font-size:14px;
+}
+
+#arama:focus{
+    border-color:#f35b9b;
+}
+
+#aramaButonu{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    width:55px;
+    border-radius:0 7px 7px 0;
+    cursor:pointer;
+}
+
+.ust-buton{
+    border:0;
+    background:#fff;
+    cursor:pointer;
+    color:#444;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.ust-buton:hover{
+    color:#f35b9b;
+}
+
+/* =========================
+   KATEGORİ MENÜSÜ
+========================= */
+
+.kategori-menu{
+    background:#fff;
+    border-bottom:1px solid #eee;
+    padding:0 5%;
+    display:flex;
+    gap:25px;
+    height:48px;
+    align-items:center;
+    overflow-x:auto;
+}
+
+.kategori-menu button{
+    border:0;
+    background:none;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:13px;
+    color:#444;
+}
+
+.kategori-menu button:hover{
+    color:#f35b9b;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    margin:22px 5%;
+    min-height:280px;
+    border-radius:12px;
+    background:linear-gradient(100deg,#fff,#fff4f8);
+    border:1px solid #f1e4e9;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:45px 6%;
+    overflow:hidden;
+}
+
+.hero-yazi{
+    max-width:650px;
+}
+
+.hero-kucuk{
+    color:#f35b9b;
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    color:#666;
+    font-size:17px;
+    line-height:1.6;
+    margin-bottom:22px;
+}
+
+.hero button{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:13px 25px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.hero-dekor{
+    font-size:100px;
+}
+
+/* =========================
+   AI
+========================= */
+
+.ai-bolumu{
+    background:#fff;
+    margin:22px 5%;
+    padding:30px;
+    border:1px solid #eee;
+    border-radius:10px;
+    text-align:center;
+}
+
+.ai-baslik h2{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.ai-baslik h2 span{
+    color:#f35b9b;
+}
+
+.ai-baslik p{
+    color:#777;
+    margin-bottom:20px;
+}
+
+.ai-input{
+    max-width:850px;
+    margin:auto;
+    display:flex;
+}
+
+#istek{
+    flex:1;
+    height:48px;
+    border:1px solid #ddd;
+    border-right:0;
+    border-radius:7px 0 0 7px;
+    padding:0 18px;
+    outline:none;
+}
+
+#olustur{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:0 28px;
+    border-radius:0 7px 7px 0;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+#sonuc{
+    margin-top:15px;
+    color:#e6498c;
+    font-weight:bold;
+}
+
+/* =========================
+   BÖLÜM
+========================= */
+
+.bolum-baslik{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.bolum-baslik h2{
+    font-size:23px;
+}
+
+.bolum-baslik span{
+    color:#777;
+    font-size:13px;
+}
+
+/* =========================
+   KATEGORİLER
+========================= */
+
+.kategori-alani{
+    margin:30px 5%;
+}
+
+.kategoriler{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:12px;
+}
+
+.kategori{
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:8px;
+    padding:16px 8px;
+    text-align:center;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.kategori:hover,
+.kategori.aktif{
+    border-color:#f35b9b;
+    color:#f35b9b;
+    box-shadow:0 5px 15px rgba(243,91,155,.08);
+}
+
+/* =========================
+   ÜRÜNLER
+========================= */
+
+.urun-alani{
+    margin:35px 5%;
+}
+
+.urunler{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+}
+
+.urun-karti{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid #eee;
+    transition:.25s;
+    position:relative;
+}
+
+.urun-karti:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 28px rgba(0,0,0,.10);
+}
+
+.urun-gorsel{
+    height:220px;
+    background:#f8f8f8;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.urun-gorsel img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.urun-icerik{
+    padding:15px;
+}
+
+.urun-icerik h3{
+    font-size:15px;
+    margin-bottom:7px;
+    color:#222;
+}
+
+.kategori-yazi{
+    color:#999;
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.urun-puan{
+    color:#f5a623;
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.aciklama{
+    color:#777;
+    font-size:12px;
+    line-height:1.45;
+    min-height:35px;
+    margin-bottom:10px;
+}
+
+.fiyat{
+    color:#222;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.eski-fiyat{
+    color:#999;
+    text-decoration:line-through;
+    font-size:12px;
+    margin-right:7px;
+}
+
+.indirim{
+    background:#e9f8ee;
+    color:#159447;
+    padding:4px 7px;
+    border-radius:5px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.sepete-ekle{
+    flex:1;
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:11px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.sepete-ekle:hover{
+    background:#e6498c;
+}
+
+.favori{
+    width:42px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+.favori:hover{
+    border-color:#f35b9b;
+    background:#fff4f8;
+}
+
+.urun-alt{
+    display:flex;
+    gap:7px;
+}
+
+/* =========================
+   KAMPANYALAR
+========================= */
+
+.kampanya-alani{
+    margin:40px 5%;
+}
+
+.kampanyalar{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.kampanya{
+    background:#fff;
+    border-radius:9px;
+    padding:25px;
+    border:1px solid #eee;
+}
+
+.kampanya.pembe{
+    background:#fff1f6;
+}
+
+.kampanya.sari{
+    background:#fff9e8;
+}
+
+.kampanya.mavi{
+    background:#eef7ff;
+}
+
+.kampanya h3{
+    margin-bottom:8px;
+}
+
+.kampanya p{
+    color:#666;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* =========================
+   FIRSATLAR
+========================= */
+
+.firsatlar-alani{
+    margin:40px 5%;
+}
+
+.firsat-kutulari{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.firsat-kutu{
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:24px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.firsat-ikon{
+    width:58px;
+    height:58px;
+    border-radius:12px;
+    background:#fff0f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    flex-shrink:0;
+}
+
+.firsat-kutu strong{
+    display:block;
+    font-size:17px;
+    margin-bottom:6px;
+}
+
+.firsat-kutu p{
+    color:#777;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* =========================
+   FAVORİLER
+========================= */
+
+.favoriler-alani{
+    margin:40px 5%;
+    background:#fff;
+    padding:28px;
+    border:1px solid #eee;
+    border-radius:12px;
+}
+
+/* =========================
+   SEPET
+========================= */
+
+.sepet{
+    margin:40px 5%;
+    background:#fff;
+    padding:28px;
+    border:1px solid #eee;
+    border-radius:12px;
+}
+
+.sepet h2{
+    margin-bottom:22px;
+    font-size:24px;
+}
+
+#sepetSayisi{
+    color:#777;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.sepet-urun{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid #eee;
+}
+
+.adet-kontrol{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.adet-btn{
+    width:30px;
+    height:30px;
+    border:1px solid #ddd;
+    background:#fff;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.adet-sayi{
+    min-width:25px;
+    text-align:center;
+}
+
+.sil-btn{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.sepet-toplam{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:22px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+#sepetToplam{
+    color:#f35b9b;
+}
+
+.checkout-btn{
+    margin-top:20px;
+    width:100%;
+    border:0;
+    background:#222;
+    color:#fff;
+    padding:15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.checkout-btn:hover{
+    background:#000;
+}
+
+/* =========================
+   YORUM
+========================= */
+
+.yorumlar{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid #eee;
+}
+
+.yorum{
+    background:#fafafa;
+    padding:12px;
+    border-radius:7px;
+    margin-top:8px;
+    font-size:13px;
+}
+
+.yorum-form{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+}
+
+.yorum-form select,
+.yorum-form input{
+    padding:9px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.yorum-form input{
+    flex:1;
+}
+
+.yorum-form button{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:0 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* =========================
+   KULLANICI HESABI
+========================= */
+
+#hesapAlani{
+    display:none !important;
+}
+
+.hesap-alani{
+    margin:40px 5%;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:28px;
+}
+
+.hesap-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.hesap-kutu{
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:20px;
+}
+
+.hesap-kutu h3{
+    margin-bottom:15px;
+}
+
+.hesap-input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:7px;
+    margin-bottom:10px;
+    outline:none;
+}
+
+.pembe-btn{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:11px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* =========================
+   SİPARİŞLER
+========================= */
+
+.siparisler-alani{
+    margin:40px 5%;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:12px;
+    padding:28px;
+}
+
+.siparis-karti{
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:18px;
+    margin-top:12px;
+}
+
+.siparis-baslik{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:10px;
+}
+
+.durum{
+    background:#e9f8ee;
+    color:#159447;
+    padding:5px 9px;
+    border-radius:5px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* =========================
+   SATICI MERKEZİ
+========================= */
+
+.satici-merkezi{
+    display:none;
+    margin:30px 5%;
+    background:#fff;
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:25px;
+}
+
+.satici-merkezi.acik{
+    display:block;
+}
+
+.satici-baslik{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.kapat-btn{
+    border:0;
+    background:#f7f7f7;
+    padding:9px 14px;
+    cursor:pointer;
+}
+
+.satici-istatistik{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.istatistik{
+    background:#fafafa;
+    border:1px solid #eee;
+    padding:18px;
+    text-align:center;
+    border-radius:8px;
+}
+
+.istatistik strong{
+    display:block;
+    margin-top:7px;
+    color:#f35b9b;
+    font-size:22px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr 1.5fr 2fr auto;
+    gap:9px;
+    margin-top:15px;
+}
+
+.form-grid input,
+.form-grid select{
+    padding:11px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+}
+
+#urunEkleBtn{
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    padding:0 18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.satici-urun-satiri{
+    display:flex;
+    justify-content:space-between;
+    padding:12px;
+    background:#fafafa;
+    margin-top:8px;
+    border-radius:6px;
+}
+
+.satici-sil{
+    border:0;
+    background:#eee;
+    padding:6px 10px;
+    cursor:pointer;
+}
+
+/* =========================
+   KOMİSYON
+========================= */
+
+.komisyon-kutu{
+    background:#fff8fb;
+    border:1px solid #f6d9e5;
+    border-radius:10px;
+    padding:18px;
+    margin-top:20px;
+}
+
+.komisyon-kutu strong{
+    color:#f35b9b;
+}
+
+/* =========================
+   KARGO
+========================= */
+
+.kargo-takip{
+    margin-top:12px;
+}
+
+.kargo-adimlari{
+    display:flex;
+    gap:5px;
+    margin-top:10px;
+}
+
+.kargo-adim{
+    flex:1;
+    height:7px;
+    background:#eee;
+    border-radius:20px;
+}
+
+.kargo-adim.aktif{
+    background:#f35b9b;
+}
+
+/* =========================
+   GÜVEN
+========================= */
+
+.guven-alani{
+    background:#fff;
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+    margin-top:45px;
+    padding:28px 5%;
+}
+
+.guvenler{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.guven{
+    text-align:center;
+}
+
+.guven-icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.guven strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.guven span{
+    color:#777;
+    font-size:13px;
+}
+
+/* =========================
+   SHOPZA BİLGİ
+========================= */
+
+.shopza-bilgi{
+    background:#fff;
+    border-top:1px solid #eee;
+    padding:45px 5%;
+}
+
+.shopza-bilgi-ust{
+    max-width:1100px;
+    margin:auto;
+}
+
+.shopza-bilgi-ust h2{
+    margin-bottom:12px;
+}
+
+.shopza-bilgi-ust p{
+    color:#666;
+    line-height:1.7;
+    max-width:800px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    background:#222;
+    color:#fff;
+    padding:40px 5% 20px;
+}
+
+.footer-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer h3{
+    margin-bottom:15px;
+}
+
+.footer p,
+.footer li{
+    color:#bbb;
+    font-size:13px;
+    line-height:2;
+}
+
+.footer ul{
+    list-style:none;
+}
+
+.footer a{
+    color:#bbb;
+    text-decoration:none;
+}
+
+.footer-logo{
+    color:#f35b9b;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.footer-alt{
+    max-width:1200px;
+    margin:30px auto 0;
+    padding-top:20px;
+    border-top:1px solid #444;
+    color:#999;
+    font-size:12px;
+    text-align:center;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.acik{
+    display:flex;
+}
+
+.modal-kutu{
+    background:#fff;
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow:auto;
+    border-radius:14px;
+    padding:25px;
+    position:relative;
+}
+
+.modal-kapat{
+    position:absolute;
+    right:15px;
+    top:12px;
+    border:0;
+    background:#f5f5f5;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* =========================
+   GİRİŞ / KAYIT MODALI
+========================= */
+
+.hesap-modal-kutu{
+    background:#fff;
+    width:100%;
+    max-width:430px;
+    border-radius:14px;
+    padding:30px;
+    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.20);
+}
+
+.hesap-modal-logo{
+    text-align:center;
+    color:#f35b9b;
+    font-size:30px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.hesap-modal-baslik{
+    text-align:center;
+    color:#555;
+    font-size:14px;
+    margin-bottom:22px;
+}
+
+.hesap-sekmeler{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-bottom:1px solid #eee;
+    margin-bottom:20px;
+}
+
+.hesap-sekme{
+    border:0;
+    background:#fff;
+    padding:13px;
+    cursor:pointer;
+    font-weight:bold;
+    color:#777;
+    border-bottom:2px solid transparent;
+}
+
+.hesap-sekme.aktif{
+    color:#f35b9b;
+    border-bottom-color:#f35b9b;
+}
+
+.hesap-form{
+    display:none;
+}
+
+.hesap-form.aktif{
+    display:block;
+}
+
+.hesap-modal-input{
+    width:100%;
+    height:46px;
+    border:1px solid #ddd;
+    border-radius:7px;
+    padding:0 13px;
+    margin-bottom:12px;
+    outline:none;
+}
+
+.hesap-modal-input:focus{
+    border-color:#f35b9b;
+}
+
+.hesap-modal-btn{
+    width:100%;
+    height:46px;
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.hesap-modal-btn:hover{
+    background:#e6498c;
+}
+
+.hesap-kapat{
+    position:absolute;
+    right:15px;
+    top:15px;
+    width:34px;
+    height:34px;
+    border:0;
+    border-radius:50%;
+    background:#f5f5f5;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.hesap-kapat:hover{
+    background:#eee;
+}
+
+.hesap-alt-yazi{
+    text-align:center;
+    color:#888;
+    font-size:12px;
+    margin-top:15px;
+}
+
+.urun-detay-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.urun-detay-grid img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.detay-buton{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    background:#f35b9b;
+    color:#fff;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* =========================
+   BİLDİRİM
+========================= */
+
+.bildirim{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#222;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    z-index:5000;
+    opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
+    transition:.3s;
+}
+
+.bildirim.acik{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* =========================
+   MOBİL
+========================= */
+
+@media(max-width:1100px){
+
+    .urunler{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .kategoriler{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .satici-istatistik{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    .urunler{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .kategoriler{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .kampanyalar{
+        grid-template-columns:1fr;
+    }
+
+    .firsat-kutulari{
+        grid-template-columns:1fr;
+    }
+
+    .hesap-grid{
+        grid-template-columns:1fr;
+    }
+
+    .urun-detay-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+
+    .ust-bar{
+        flex-wrap:wrap;
+    }
+
+    .logo{
+        width:100%;
+        text-align:center;
+    }
+
+    .arama-alani{
+        width:100%;
+        order:2;
+    }
+
+    .ust-buton{
+        order:3;
+        flex:1;
+    }
+
+    .hero{
+        text-align:center;
+    }
+
+    .hero-dekor{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:29px;
+    }
+
+    .ai-input{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    #istek{
+        border-right:1px solid #ddd;
+        border-radius:7px;
+        height:45px;
+    }
+
+    #olustur{
+        height:45px;
+        border-radius:7px;
+    }
+
+    .kategoriler{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .urunler{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .guvenler{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .satici-istatistik{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    #urunEkleBtn{
+        height:42px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .sepet-urun{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .yorum-form{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     ÜST BAR
+========================= -->
+
+<header class="ust-bar">
+
+    <div class="logo" id="logo">
+        SHOPZA
+    </div>
+
+    <div class="arama-alani">
+
+        <input
+            id="arama"
+            placeholder="Ürün, kategori veya marka ara..."
+        >
+
+        <button id="aramaButonu">
+            🔍
+        </button>
+
+    </div>
+
+    <button class="ust-buton" id="favoriButonu">
+        ❤️ Favoriler
+        <span id="favoriSayisi">0</span>
+    </button>
+
+    <button class="ust-buton" id="hesapButonu">
+        👤 Hesabım
+    </button>
+
+    <button class="ust-buton" id="ustSepet">
+        🛒 Sepet
+        <span id="ustSepetSayisi">0</span>
+    </button>
+
+    <button class="ust-buton" id="saticiButonu">
+        🏪 Satıcı Merkezi
+    </button>
+
+</header>
+
+<!-- =========================
+     16 KATEGORİ
+========================= -->
+
+<nav class="kategori-menu">
+
+    <button data-kategori="Tüm Ürünler">Tüm Ürünler</button>
+    <button data-kategori="Kadın">Kadın</button>
+    <button data-kategori="Erkek">Erkek</button>
+    <button data-kategori="Çocuk & Bebek">Çocuk & Bebek</button>
+    <button data-kategori="Kozmetik">Kozmetik</button>
+    <button data-kategori="Ev & Yaşam">Ev & Yaşam</button>
+    <button data-kategori="Elektronik">Elektronik</button>
+    <button data-kategori="Bilgisayar & Teknoloji">Bilgisayar & Teknoloji</button>
+    <button data-kategori="Ayakkabı & Çanta">Ayakkabı & Çanta</button>
+    <button data-kategori="Takı & Aksesuar">Takı & Aksesuar</button>
+    <button data-kategori="Spor & Outdoor">Spor & Outdoor</button>
+    <button data-kategori="Oyun">Oyun</button>
+    <button data-kategori="Kitap & Kırtasiye">Kitap & Kırtasiye</button>
+    <button data-kategori="Evcil Hayvan">Evcil Hayvan</button>
+    <button data-kategori="Otomotiv">Otomotiv</button>
+    <button data-kategori="Hediyelik">Hediyelik</button>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-yazi">
+
+        <div class="hero-kucuk">
+            ✨ SHOPZA'YA HOŞ GELDİN
+        </div>
+
+        <h1>
+            Aradığını bul,<br>
+            alışverişini kolaylaştır.
+        </h1>
+
+        <p>
+            Ne aradığını SHOPZA AI'ya anlat.
+            Sana uygun ürünleri keşfet,
+            favorilerine ekle ve sepete at.
+        </p>
+
+        <button id="heroSor">
+            🤖 SHOPZA AI'ya Sor
+        </button>
+
+    </div>
+
+    <div class="hero-dekor">
+        🛍️
+    </div>
+
+</section>
+
+<!-- =========================
+     SHOPZA AI
+========================= -->
+
+<section class="ai-bolumu" id="aiBolumu">
+
+    <div class="ai-baslik">
+
+        <h2>
+            🤖 <span>SHOPZA AI</span>
+        </h2>
+
+        <p>
+            Ne aradığını normal bir cümleyle yaz.
+        </p>
+
+    </div>
+
+    <div class="ai-input">
+
+        <input
+            id="istek"
+            placeholder="Örn: sevgilime 2000 TL altında hediye bul"
+        >
+
+        <button id="olustur">
+            Bul ✨
+        </button>
+
+    </div>
+
+    <div id="sonuc"></div>
+
+</section>
+
+<!-- =========================
+     KATEGORİLER
+========================= -->
+
+<section class="kategori-alani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            📂 Kategorileri Keşfet
+        </h2>
+
+        <span>
+            16 kategori
+        </span>
+
+    </div>
+
+    <div class="kategoriler">
+
+        <button class="kategori aktif" data-kategori="Tüm Ürünler">
+            🛍️<br>Tüm Ürünler
+        </button>
+
+        <button class="kategori" data-kategori="Kadın">
+            👗<br>Kadın
+        </button>
+
+        <button class="kategori" data-kategori="Erkek">
+            👔<br>Erkek
+        </button>
+
+        <button class="kategori" data-kategori="Çocuk & Bebek">
+            🧸<br>Çocuk & Bebek
+        </button>
+
+        <button class="kategori" data-kategori="Kozmetik">
+            💄<br>Kozmetik
+        </button>
+
+        <button class="kategori" data-kategori="Ev & Yaşam">
+            🏠<br>Ev & Yaşam
+        </button>
+
+        <button class="kategori" data-kategori="Elektronik">
+            📱<br>Elektronik
+        </button>
+
+        <button class="kategori" data-kategori="Bilgisayar & Teknoloji">
+            💻<br>Bilgisayar
+        </button>
+
+        <button class="kategori" data-kategori="Ayakkabı & Çanta">
+            👟<br>Ayakkabı
+        </button>
+
+        <button class="kategori" data-kategori="Takı & Aksesuar">
+            💍<br>Takı
+        </button>
+
+        <button class="kategori" data-kategori="Spor & Outdoor">
+            🏃<br>Spor
+        </button>
+
+        <button class="kategori" data-kategori="Oyun">
+            🎮<br>Oyun
+        </button>
+
+        <button class="kategori" data-kategori="Kitap & Kırtasiye">
+            📚<br>Kitap
+        </button>
+
+        <button class="kategori" data-kategori="Evcil Hayvan">
+            🐱<br>Evcil Hayvan
+        </button>
+
+        <button class="kategori" data-kategori="Otomotiv">
+            🚗<br>Otomotiv
+        </button>
+
+        <button class="kategori" data-kategori="Hediyelik">
+            🎁<br>Hediyelik
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     ÜRÜNLER
+========================= -->
+
+<section class="urun-alani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            🛍️ Senin İçin Seçtik
+        </h2>
+
+        <span id="urunSayisi"></span>
+
+    </div>
+
+    <div
+        class="urunler"
+        id="urunler"
+    ></div>
+
+</section>
+
+<!-- =========================
+     ÇOK SATANLAR
+========================= -->
+
+<section class="urun-alani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            🔥 Çok Satanlar
+        </h2>
+
+        <span>
+            En çok ilgi gören ürünler
+        </span>
+
+    </div>
+
+    <div
+        class="urunler"
+        id="cokSatanlar"
+    ></div>
+
+</section>
+
+<!-- =========================
+     KAMPANYALAR
+========================= -->
+
+<section class="kampanya-alani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            🏷️ SHOPZA'da Neler Var?
+        </h2>
+
+    </div>
+
+    <div class="kampanyalar">
+
+        <div class="kampanya pembe">
+
+            <h3>
+                🤖 AI ile Daha Kolay
+            </h3>
+
+            <p>
+                Aradığın ürünü tek tek aramak yerine
+                SHOPZA AI'ya ne istediğini söyle.
+            </p>
+
+        </div>
+
+        <div class="kampanya sari">
+
+            <h3>
+                🎁 Hediye Bul
+            </h3>
+
+            <p>
+                Sevdiklerin için bütçene uygun
+                hediye fikirlerini keşfet.
+            </p>
+
+        </div>
+
+        <div class="kampanya mavi">
+
+            <h3>
+                🔎 Karşılaştır & Keşfet
+            </h3>
+
+            <p>
+                Farklı ürünleri incele,
+                ihtiyaçlarına uygun seçenekleri bul.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FIRSATLAR
+========================= -->
+
+<section class="firsatlar-alani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            ⚡ Fırsatlar
+        </h2>
+
+        <span>
+            Bugünün öne çıkanları
+        </span>
+
+    </div>
+
+    <div class="firsat-kutulari">
+
+        <div class="firsat-kutu">
+
+            <div class="firsat-ikon">
+                🎁
+            </div>
+
+            <div>
+                <strong>
+                    Hediye Fırsatları
+                </strong>
+
+                <p>
+                    Sevdiklerin için özel ürünleri keşfet.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="firsat-kutu">
+
+            <div class="firsat-ikon">
+                ⚡
+            </div>
+
+            <div>
+                <strong>
+                    Elektronik Fırsatları
+                </strong>
+
+                <p>
+                    Teknoloji ürünlerini keşfet.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="firsat-kutu">
+
+            <div class="firsat-ikon">
+                💄
+            </div>
+
+            <div>
+                <strong>
+                    Kozmetik Fırsatları
+                </strong>
+
+                <p>
+                    Bakım ve güzellik ürünlerini keşfet.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FAVORİLER
+========================= -->
+
+<section class="favoriler-alani" id="favorilerAlani">
+
+    <div class="bolum-baslik">
+
+        <h2>
+            ❤️ Favorilerim
+        </h2>
+
+        <span id="favoriUrunSayisi">
+            0 ürün
+        </span>
+
+    </div>
+
+    <div
+        class="urunler"
+        id="favoriUrunleri"
+    ></div>
+
+</section>
+
+<!-- =========================
+     SEPET
+========================= -->
+
+<section class="sepet" id="sepet">
+
+    <h2>
+        🛒 Sepetim
+    </h2>
+
+    <div id="sepetSayisi">
+        Sepetiniz boş.
+    </div>
+
+    <div id="sepetListesi"></div>
+
+    <div class="sepet-toplam">
+
+        Toplam:
+
+        <span id="sepetToplam">
+            0 TL
+        </span>
+
+    </div>
+
+    <button
+        class="checkout-btn"
+        id="odemeHazirlikBtn"
+    >
+        💳 Ödemeye Geç
+    </button>
+
+</section>
+
+
+<!-- =========================
+     SİPARİŞLER
+========================= -->
+
+<section
+    class="siparisler-alani"
+    id="siparislerAlani"
+>
+
+    <div class="bolum-baslik">
+
+        <h2>
+            📋 Siparişlerim
+        </h2>
+
+        <span id="siparisSayisi">
+            0 sipariş
+        </span>
+
+    </div>
+
+    <div id="siparisListesi"></div>
+
+</section>
+
+<!-- =========================
+     SATICI MERKEZİ
+========================= -->
+
+<section
+    class="satici-merkezi"
+    id="saticiMerkezi"
+>
+
+    <div class="satici-baslik">
+
+        <h2>
+            🏪 SHOPZA Satıcı Merkezi
+        </h2>
+
+        <button
+            class="kapat-btn"
+            id="saticiKapat"
+        >
+            Kapat ✕
+        </button>
+
+    </div>
+
+    <div class="satici-istatistik">
+
+        <div class="istatistik">
+            Sipariş
+            <strong id="saticiSiparis">
+                0
+            </strong>
+        </div>
+
+        <div class="istatistik">
+            Satış
+            <strong id="saticiSatis">
+                0 TL
+            </strong>
+        </div>
+
+        <div class="istatistik">
+            SHOPZA Komisyonu
+            <strong>
+                %15
+            </strong>
+        </div>
+
+        <div class="istatistik">
+            Satıcı Net
+            <strong id="saticiNet">
+                0 TL
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="komisyon-kutu">
+
+        <strong>
+            💰 SHOPZA Komisyon Sistemi
+        </strong>
+
+        <p style="margin-top:7px;color:#666;line-height:1.5">
+
+            Bu demo sistemde her satıştan
+            <b>%15 SHOPZA komisyonu</b>
+            hesaplanmaktadır.
+
+            Gerçek para transferleri daha sonra
+            güvenli backend sistemi üzerinden yapılacaktır.
+
+        </p>
+
+    </div>
+
+    <h3 style="margin-top:25px">
+        ➕ Yeni Ürün Ekle
+    </h3>
+
+    <div class="form-grid">
+
+        <input
+            id="yeniUrunAd"
+            placeholder="Ürün adı"
+        >
+
+        <input
+            id="yeniUrunFiyat"
+            type="number"
+            placeholder="Fiyat"
+        >
+
+        <select id="yeniUrunKategori">
+
+            <option>Kadın</option>
+            <option>Erkek</option>
+            <option>Çocuk & Bebek</option>
+            <option>Kozmetik</option>
+            <option>Ev & Yaşam</option>
+            <option>Elektronik</option>
+            <option>Bilgisayar & Teknoloji</option>
+            <option>Ayakkabı & Çanta</option>
+            <option>Takı & Aksesuar</option>
+            <option>Spor & Outdoor</option>
+            <option>Oyun</option>
+            <option>Kitap & Kırtasiye</option>
+            <option>Evcil Hayvan</option>
+            <option>Otomotiv</option>
+            <option>Hediyelik</option>
+
+        </select>
+
+        <input
+            id="yeniUrunResim"
+            placeholder="Resim linki"
+        >
+
+        <button id="urunEkleBtn">
+            Ürün Ekle
+        </button>
+
+    </div>
+
+    <div style="margin-top:25px">
+
+        <h3>
+            📦 Ürünlerim
+        </h3>
+
+        <div id="saticiUrunListesi"></div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     GÜVEN
+========================= -->
+
+<section class="guven-alani">
+
+    <div class="guvenler">
+
+        <div class="guven">
+
+            <div class="guven-icon">
+                🔒
+            </div>
+
+            <strong>
+                Güvenli Alışveriş
+            </strong>
+
+            <span>
+                Güvenli alışveriş deneyimi
+            </span>
+
+        </div>
+
+        <div class="guven">
+
+            <div class="guven-icon">
+                🚚
+            </div>
+
+            <strong>
+                Kargo Takibi
+            </strong>
+
+            <span>
+                Siparişlerini takip et
+            </span>
+
+        </div>
+
+        <div class="guven">
+
+            <div class="guven-icon">
+                🤖
+            </div>
+
+            <strong>
+                AI Destekli
+            </strong>
+
+            <span>
+                Alışverişinde akıllı yardım
+            </span>
+
+        </div>
+
+        <div class="guven">
+
+            <div class="guven-icon">
+                💬
+            </div>
+
+            <strong>
+                Destek
+            </strong>
+
+            <span>
+                Soruların için SHOPZA
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     SHOPZA BİLGİ
+========================= -->
+
+<section class="shopza-bilgi">
+
+    <div class="shopza-bilgi-ust">
+
+        <h2>
+            SHOPZA Hakkında
+        </h2>
+
+        <p>
+
+            SHOPZA, alışveriş deneyimini yapay zekâ ile
+            daha kolay hale getirmeyi amaçlayan yeni nesil
+            bir alışveriş platformudur.
+
+            Kullanıcıların aradıkları ürünleri daha kolay
+            keşfetmesine yardımcı olur.
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+        <div>
+
+            <div class="footer-logo">
+                SHOPZA
+            </div>
+
+            <p>
+                AI destekli yeni nesil alışveriş deneyimi.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3>
+                SHOPZA
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="#hesapAlani">
+                        Hesabım
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#siparislerAlani">
+                        Siparişlerim
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#favorilerAlani">
+                        Favorilerim
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#sepet">
+                        Sepetim
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Alışveriş
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="#" onclick="kategoriSec('Kadın');return false;">
+                        Kadın
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="kategoriSec('Erkek');return false;">
+                        Erkek
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="kategoriSec('Kozmetik');return false;">
+                        Kozmetik
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="kategoriSec('Elektronik');return false;">
+                        Elektronik
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="kategoriSec('Ev & Yaşam');return false;">
+                        Ev & Yaşam
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div>
+
+            <h3>
+                Satıcılar
+            </h3>
+
+            <ul>
+
+                <li>
+                    <a href="#saticiMerkezi">
+                        Satıcı Ol
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#saticiMerkezi">
+                        Satıcı Merkezi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#saticiMerkezi">
+                        Ürün Ekle
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#saticiMerkezi">
+                        Komisyon Bilgileri
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="footer-alt">
+
+        © 2026 SHOPZA — Tüm hakları saklıdır.
+
+    </div>
+
+</footer>
+
+<!-- =========================
+     ÜRÜN DETAY MODALI
+========================= -->
+
+<div
+    class="modal"
+    id="urunModal"
+>
+
+    <div class="modal-kutu">
+
+        <button
+            class="modal-kapat"
+            onclick="modalKapat('urunModal')"
+        >
+            ✕
+        </button>
+
+        <div id="urunDetay"></div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     GİRİŞ / KAYIT MODALI
+========================= -->
+
+<div
+    class="modal"
+    id="hesapModal"
+>
+
+    <div class="hesap-modal-kutu">
+
+        <button
+            class="hesap-kapat"
+            onclick="hesapModalKapat()"
+        >
+            ✕
+        </button>
+
+        <div class="hesap-modal-logo">
+            SHOPZA
+        </div>
+
+        <div class="hesap-modal-baslik">
+            Alışverişe devam etmek için hesabına giriş yap
+        </div>
+
+        <div class="hesap-sekmeler">
+
+            <button
+                class="hesap-sekme aktif"
+                id="girisSekme"
+                onclick="hesapSekmeAc('giris')"
+            >
+                Giriş Yap
+            </button>
+
+            <button
+                class="hesap-sekme"
+                id="kayitSekme"
+                onclick="hesapSekmeAc('kayit')"
+            >
+                Kayıt Ol
+            </button>
+
+        </div>
+
+
+        <!-- GİRİŞ -->
+
+        <div
+            class="hesap-form aktif"
+            id="girisFormu"
+        >
+
+            <input
+                class="hesap-modal-input"
+                id="girisEmail"
+                type="email"
+                placeholder="E-posta adresin"
+            >
+
+            <input
+                class="hesap-modal-input"
+                id="girisSifre"
+                type="password"
+                placeholder="Şifren"
+            >
+
+            <button
+                class="hesap-modal-btn"
+                id="girisBtn"
+            >
+                Giriş Yap
+            </button>
+
+            <div class="hesap-alt-yazi">
+                SHOPZA hesabına güvenli şekilde giriş yap
+            </div>
+
+        </div>
+
+
+        <!-- KAYIT -->
+
+        <div
+            class="hesap-form"
+            id="kayitFormu"
+        >
+
+            <input
+                class="hesap-modal-input"
+                id="kayitAd"
+                placeholder="Ad Soyad"
+            >
+
+            <input
+                class="hesap-modal-input"
+                id="kayitEmail"
+                type="email"
+                placeholder="E-posta adresin"
+            >
+
+            <input
+                class="hesap-modal-input"
+                id="kayitSifre"
+                type="password"
+                placeholder="Şifre"
+            >
+
+            <button
+                class="hesap-modal-btn"
+                id="kayitBtn"
+            >
+                Hesap Oluştur
+            </button>
+
+            <div class="hesap-alt-yazi">
+                Ücretsiz SHOPZA hesabını oluştur
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     ÖDEME MODALI
+========================= -->
+
+<div
+    class="modal"
+    id="odemeModal"
+>
+
+    <div class="modal-kutu">
+
+        <button
+            class="modal-kapat"
+            onclick="modalKapat('odemeModal')"
+        >
+            ✕
+        </button>
+
+        <h2>
+            💳 SHOPZA Ödeme
+        </h2>
+
+        <div
+            style="
+                background:#fff8fb;
+                border:1px solid #f5d8e4;
+                padding:18px;
+                border-radius:9px;
+                margin-top:18px;
+            "
+        >
+
+            <strong>
+                🚧 Gerçek ödeme altyapısı henüz bağlanmadı.
+            </strong>
+
+            <p
+                style="
+                    color:#666;
+                    line-height:1.6;
+                    margin-top:8px;
+                "
+            >
+
+                Bu ekran SHOPZA'nın ödeme aşamasına
+                hazır olduğunu gösteren demo ekrandır.
+
+                Gerçek ödeme aşamasında güvenli bir ödeme
+                sağlayıcısı, backend, ödeme doğrulaması,
+                sipariş oluşturma ve webhook sistemi
+                kurulacaktır.
+
+            </p>
+
+        </div>
+
+        <div
+            style="
+                margin-top:20px;
+                padding:15px;
+                background:#fafafa;
+                border-radius:8px;
+            "
+        >
+
+            <strong>
+                Sepet Tutarı:
+            </strong>
+
+            <span
+                id="odemeToplam"
+                style="
+                    color:#f35b9b;
+                    font-weight:bold;
+                "
+            >
+                0 TL
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     BİLDİRİM
+========================= -->
+
+<div
+    class="bildirim"
+    id="bildirim"
+></div>
+
+
+<script>
+
+/* =====================================================
+   SHOPZA ÜRÜNLERİ
+===================================================== */
+
+let urunler = [
+
+    {
+        id:"p001",
+        ad:"Romantik Hediye Seti",
+        fiyat:1299,
+        puan:4.8,
+        yorumSayisi:86,
+        indirim:10,
+        kategori:"Hediyelik",
+        aciklama:"Sevdiklerin için özel hazırlanmış romantik hediye seti.",
+        resim:"https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p002",
+        ad:"Zarif Kolye",
+        fiyat:899,
+        puan:4.9,
+        yorumSayisi:128,
+        indirim:10,
+        kategori:"Takı & Aksesuar",
+        aciklama:"Zarif ve şık bir görünüm için özel kolye.",
+        resim:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p003",
+        ad:"Romantik Hediye Kutusu",
+        fiyat:1749,
+        puan:4.9,
+        yorumSayisi:128,
+        indirim:10,
+        kategori:"Hediyelik",
+        aciklama:"Sevdiklerine özel hazırlanmış hediye kutusu.",
+        resim:"https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p004",
+        ad:"Kadın Omuz Çantası",
+        fiyat:999,
+        puan:4.5,
+        yorumSayisi:74,
+        indirim:10,
+        kategori:"Ayakkabı & Çanta",
+        aciklama:"Günlük kullanım için şık kadın çantası.",
+        resim:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p005",
+        ad:"Erkek Spor Ayakkabı",
+        fiyat:1499,
+        puan:4.7,
+        yorumSayisi:92,
+        indirim:10,
+        kategori:"Ayakkabı & Çanta",
+        aciklama:"Günlük ve sportif kullanım için rahat ayakkabı.",
+        resim:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p006",
+        ad:"Kablosuz Kulaklık",
+        fiyat:1299,
+        puan:4.8,
+        yorumSayisi:245,
+        indirim:15,
+        kategori:"Elektronik",
+        aciklama:"Müzik ve günlük kullanım için kablosuz kulaklık.",
+        resim:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p007",
+        ad:"Telefon Kılıfı",
+        fiyat:299,
+        puan:4.6,
+        yorumSayisi:183,
+        indirim:10,
+        kategori:"Elektronik",
+        aciklama:"Telefonunu korumak için şık kılıf.",
+        resim:"https://images.unsplash.com/photo-1601593346740-925612772716?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p008",
+        ad:"Cilt Bakım Seti",
+        fiyat:799,
+        puan:4.8,
+        yorumSayisi:154,
+        indirim:15,
+        kategori:"Kozmetik",
+        aciklama:"Günlük bakım için özel hazırlanmış set.",
+        resim:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p009",
+        ad:"Parfüm",
+        fiyat:1199,
+        puan:4.7,
+        yorumSayisi:211,
+        indirim:10,
+        kategori:"Kozmetik",
+        aciklama:"Şık ve kalıcı koku.",
+        resim:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p010",
+        ad:"Dekoratif Masa Lambası",
+        fiyat:699,
+        puan:4.6,
+        yorumSayisi:63,
+        indirim:10,
+        kategori:"Ev & Yaşam",
+        aciklama:"Salon, oda ve çalışma alanları için sıcak ve şık dekoratif lamba.",
+        resim:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p011",
+        ad:"Yoga Matı",
+        fiyat:499,
+        puan:4.7,
+        yorumSayisi:81,
+        indirim:10,
+        kategori:"Spor & Outdoor",
+        aciklama:"Evde spor için rahat yoga matı.",
+        resim:"https://images.unsplash.com/photo-1592432678016-e910b452f9a2?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p012",
+        ad:"Çocuk Eğitici Oyuncak",
+        fiyat:599,
+        puan:4.8,
+        yorumSayisi:77,
+        indirim:10,
+        kategori:"Çocuk & Bebek",
+        aciklama:"Çocukların gelişimine destek olan eğitici oyuncak.",
+        resim:"https://images.unsplash.com/photo-1599623560574-39d485900c95?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p013",
+        ad:"Roman Kitabı",
+        fiyat:249,
+        puan:4.7,
+        yorumSayisi:55,
+        indirim:10,
+        kategori:"Kitap & Kırtasiye",
+        aciklama:"Keyifli vakit geçirmek için sürükleyici roman.",
+        resim:"https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p014",
+        ad:"Kadın Basic Tişört",
+        fiyat:599,
+        puan:4.5,
+        yorumSayisi:94,
+        indirim:10,
+        kategori:"Kadın",
+        aciklama:"Günlük kullanım için rahat basic tişört.",
+        resim:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p015",
+        ad:"Erkek Casual Gömlek",
+        fiyat:749,
+        puan:4.6,
+        yorumSayisi:72,
+        indirim:10,
+        kategori:"Erkek",
+        aciklama:"Günlük kullanım için modern erkek gömleği.",
+        resim:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p016",
+        ad:"Kablosuz Gamepad",
+        fiyat:1299,
+        puan:4.8,
+        yorumSayisi:143,
+        indirim:15,
+        kategori:"Oyun",
+        aciklama:"Oyun keyfi için kablosuz gamepad.",
+        resim:"https://images.unsplash.com/photo-1605901309584-818e25960a8f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p017",
+        ad:"Kedi Oyuncağı Seti",
+        fiyat:349,
+        puan:4.7,
+        yorumSayisi:61,
+        indirim:10,
+        kategori:"Evcil Hayvan",
+        aciklama:"Kediler için eğlenceli oyuncak seti.",
+        resim:"https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p018",
+        ad:"Araç İçi Telefon Tutucu",
+        fiyat:449,
+        puan:4.6,
+        yorumSayisi:48,
+        indirim:10,
+        kategori:"Otomotiv",
+        aciklama:"Araç içinde telefon kullanımı için pratik tutucu.",
+        resim:"https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p019",
+        ad:"Günlük Kullanım Laptop",
+        fiyat:14999,
+        puan:4.8,
+        yorumSayisi:31,
+        indirim:10,
+        kategori:"Bilgisayar & Teknoloji",
+        aciklama:"Günlük işler, eğitim ve çalışma için laptop.",
+        resim:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p020",
+        ad:"Kablosuz Klavye",
+        fiyat:899,
+        puan:4.7,
+        yorumSayisi:67,
+        indirim:10,
+        kategori:"Bilgisayar & Teknoloji",
+        aciklama:"Masaüstü kullanım için kablosuz klavye.",
+        resim:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80"
+    },
+
+    {
+        id:"p021",
+        ad:"Gaming Mouse",
+        fiyat:749,
+        puan:4.8,
+        yorumSayisi:89,
+        indirim:15,
+        kategori:"Bilgisayar & Teknoloji",
+        aciklama:"Oyun ve bilgisayar kullanımı için hassas gaming mouse.",
+        resim:"https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=600&q=80"
+    }
+
+];
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+let kayitliSaticiUrunleri =
+    JSON.parse(
+        localStorage.getItem("shopzaSaticiUrunleri") || "[]"
+    );
+
+urunler.push(...kayitliSaticiUrunleri);
+
+
+/* =====================================================
+   SEPET
+===================================================== */
+
+let sepet =
+    JSON.parse(
+        localStorage.getItem("shopzaSepet") || "[]"
+    );
+
+
+/* =====================================================
+   FAVORİLER
+===================================================== */
+
+let favoriIdleri =
+    JSON.parse(
+        localStorage.getItem("shopzaFavoriler") || "[]"
+    );
+
+
+/* =====================================================
+   KULLANICILAR
+===================================================== */
+
+let kullanicilar =
+    JSON.parse(
+        localStorage.getItem("shopzaKullanicilar") || "[]"
+    );
+
+
+/* =====================================================
+   SİPARİŞLER
+===================================================== */
+
+let siparisler =
+    JSON.parse(
+        localStorage.getItem("shopzaSiparisler") || "[]"
+    );
+
+
+/* =====================================================
+   OTURUM
+===================================================== */
+
+let aktifKullanici =
+    JSON.parse(
+        localStorage.getItem("shopzaAktifKullanici") || "null"
+    );
+
+
+/* =====================================================
+   ELEMENTLER
+===================================================== */
+
+const urunlerKutusu =
+    document.getElementById("urunler");
+
+const urunSayisi =
+    document.getElementById("urunSayisi");
+
+const arama =
+    document.getElementById("arama");
+
+const sonuc =
+    document.getElementById("sonuc");
+
+const sepetListesi =
+    document.getElementById("sepetListesi");
+
+const sepetToplam =
+    document.getElementById("sepetToplam");
+
+const sepetSayisi =
+    document.getElementById("sepetSayisi");
+
+const ustSepetSayisi =
+    document.getElementById("ustSepetSayisi");
+
+const favoriSayisi =
+    document.getElementById("favoriSayisi");
+
+const cokSatanlarKutusu =
+    document.getElementById("cokSatanlar");
+
+
+/* =====================================================
+   YARDIMCI
+===================================================== */
+
+function bildirim(mesaj){
+
+    const alan =
+        document.getElementById("bildirim");
+
+    alan.textContent = mesaj;
+
+    alan.classList.add("acik");
+
+    setTimeout(() => {
+        alan.classList.remove("acik");
+    },2500);
+}
+
+
+function kaydet(){
+
+    localStorage.setItem(
+        "shopzaSepet",
+        JSON.stringify(sepet)
+    );
+
+    localStorage.setItem(
+        "shopzaFavoriler",
+        JSON.stringify(favoriIdleri)
+    );
+
+    localStorage.setItem(
+        "shopzaKullanicilar",
+        JSON.stringify(kullanicilar)
+    );
+
+    localStorage.setItem(
+        "shopzaSiparisler",
+        JSON.stringify(siparisler)
+    );
+
+}
+
+
+/* =====================================================
+   ÜRÜN KARTI
+===================================================== */
+
+function urunKartiOlustur(urun){
+
+    const index =
+        urunler.indexOf(urun);
+
+    const favoride =
+        favoriIdleri.includes(urun.id);
+
+    const indirim =
+        urun.indirim || 0;
+
+    let eskiFiyat =
+        urun.fiyat;
+
+    if(indirim > 0){
+
+        eskiFiyat =
+            Math.round(
+                urun.fiyat /
+                (1 - indirim / 100)
+            );
+
+    }
+
+    const kart =
+        document.createElement("div");
+
+    kart.className =
+        "urun-karti";
+
+    kart.innerHTML = `
+
+        <div
+            class="urun-gorsel"
+            onclick="urunDetayAc('${urun.id}')"
+        >
+
+            <img
+                src="${urun.resim}"
+                alt="${urun.ad}"
+                onerror="this.style.display='none'"
+            >
+
+        </div>
+
+        <div class="urun-icerik">
+
+            <h3>
+                ${urun.ad}
+            </h3>
+
+            <div class="kategori-yazi">
+                ${urun.kategori}
+            </div>
+
+            <div class="urun-puan">
+
+                ⭐ ${urun.puan || 4.7}
+
+                ${
+                    urun.yorumSayisi
+                    ?
+                    `(${urun.yorumSayisi} yorum)`
+                    :
+                    ""
+                }
+
+            </div>
+
+            <div class="aciklama">
+                ${urun.aciklama}
+            </div>
+
+            ${
+                indirim > 0
+                ?
+                `
+                <div style="margin-bottom:8px">
+
+                    <span class="eski-fiyat">
+                        ${eskiFiyat.toLocaleString("tr-TR")} TL
+                    </span>
+
+                    <span class="indirim">
+                        %${indirim} indirim
+                    </span>
+
+                </div>
+                `
+                :
+                ""
+            }
+
+            <div class="fiyat">
+                ${urun.fiyat.toLocaleString("tr-TR")} TL
+            </div>
+
+            <div
+                style="
+                    color:#159447;
+                    font-size:12px;
+                    margin-bottom:11px;
+                "
+            >
+                🚚 Kargo fırsatı
+            </div>
+
+            <div class="urun-alt">
+
+                <button
+                    class="sepete-ekle"
+                    onclick="sepeteEkle('${urun.id}')"
+                >
+                    🛒 Sepete Ekle
+                </button>
+
+                <button
+                    class="favori"
+                    onclick="favoriyeEkle('${urun.id}')"
+                >
+                    ${favoride ? "💖" : "❤️"}
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    return kart;
+}
+
+
+/* =====================================================
+   ÜRÜNLERİ GÖSTER
+===================================================== */
+
+function urunleriGoster(liste = urunler){
+
+    urunlerKutusu.innerHTML = "";
+
+    urunSayisi.textContent =
+        liste.length + " ürün";
+
+    if(liste.length === 0){
+
+        urunlerKutusu.innerHTML = `
+
+            <div
+                style="
+                    grid-column:1/-1;
+                    padding:50px;
+                    text-align:center;
+                    color:#777;
+                "
+            >
+
+                😔 Aradığın ürün bulunamadı.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    liste.forEach(urun => {
+
+        urunlerKutusu.appendChild(
+            urunKartiOlustur(urun)
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   ÜRÜN DETAY
+===================================================== */
+
+function urunDetayAc(id){
+
+    const urun =
+        urunler.find(
+            x => x.id === id
+        );
+
+    if(!urun){
+        return;
+    }
+
+    const detay =
+        document.getElementById("urunDetay");
+
+    detay.innerHTML = `
+
+        <div class="urun-detay-grid">
+
+            <div>
+
+                <img
+                    src="${urun.resim}"
+                    alt="${urun.ad}"
+                >
+
+            </div>
+
+            <div>
+
+                <div class="kategori-yazi">
+                    ${urun.kategori}
+                </div>
+
+                <h2 style="margin-bottom:10px">
+                    ${urun.ad}
+                </h2>
+
+                <div class="urun-puan">
+                    ⭐ ${urun.puan || 4.7}
+                    (${urun.yorumSayisi || 0} yorum)
+                </div>
+
+                <p
+                    style="
+                        color:#666;
+                        line-height:1.6;
+                        margin:15px 0;
+                    "
+                >
+                    ${urun.aciklama}
+                </p>
+
+                <div class="fiyat">
+                    ${urun.fiyat.toLocaleString("tr-TR")} TL
+                </div>
+
+                <button
+                    class="detay-buton"
+                    onclick="sepeteEkle('${urun.id}');modalKapat('urunModal')"
+                >
+                    🛒 Sepete Ekle
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="yorumlar">
+
+            <h3>
+                ⭐ Müşteri Yorumları
+            </h3>
+
+            <div id="urunYorumlari"></div>
+
+            <div class="yorum-form">
+
+                <select id="yorumPuan">
+
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="1">⭐</option>
+
+                </select>
+
+                <input
+                    id="yorumMetni"
+                    placeholder="Yorumunu yaz..."
+                >
+
+                <button
+                    onclick="yorumEkle('${urun.id}')"
+                >
+                    Gönder
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+    yorumlariGoster(urun);
+
+    document
+        .getElementById("urunModal")
+        .classList.add("acik");
+}
+
+
+/* =====================================================
+   YORUMLAR
+===================================================== */
+
+function yorumlariGoster(urun){
+
+    const alan =
+        document.getElementById("urunYorumlari");
+
+    if(!alan){
+        return;
+    }
+
+    const yorumlar =
+        JSON.parse(
+            localStorage.getItem(
+                "shopzaYorumlar_" + urun.id
+            ) || "[]"
+        );
+
+    if(yorumlar.length === 0){
+
+        alan.innerHTML = `
+
+            <div
+                style="
+                    color:#777;
+                    padding:12px 0;
+                "
+            >
+                Henüz kullanıcı yorumu yok.
+            </div>
+
+        `;
+
+        return;
+    }
+
+    alan.innerHTML = "";
+
+    yorumlar.forEach(yorum => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "yorum";
+
+        div.innerHTML = `
+
+            <strong>
+                ${yorum.ad}
+            </strong>
+
+            <div style="margin-top:4px">
+                ${"⭐".repeat(yorum.puan)}
+            </div>
+
+            <div style="margin-top:5px">
+                ${yorum.metin}
+            </div>
+
+        `;
+
+        alan.appendChild(div);
+
+    });
+
+}
+
+
+function yorumEkle(id){
+
+    if(!aktifKullanici){
+
+        bildirim(
+            "Yorum yapmak için giriş yapmalısın."
+        );
+
+        hesapAc();
+
+        return;
+    }
+
+    const metin =
+        document
+            .getElementById("yorumMetni")
+            .value
+            .trim();
+
+    const puan =
+        Number(
+            document
+                .getElementById("yorumPuan")
+                .value
+        );
+
+    if(!metin){
+
+        bildirim(
+            "Lütfen yorum yaz."
+        );
+
+        return;
+    }
+
+    const anahtar =
+        "shopzaYorumlar_" + id;
+
+    const yorumlar =
+        JSON.parse(
+            localStorage.getItem(anahtar) || "[]"
+        );
+
+    yorumlar.push({
+
+        ad:aktifKullanici.ad,
+
+        puan:puan,
+
+        metin:metin,
+
+        tarih:new Date().toLocaleDateString("tr-TR")
+
+    });
+
+    localStorage.setItem(
+        anahtar,
+        JSON.stringify(yorumlar)
+    );
+
+    document
+        .getElementById("yorumMetni")
+        .value = "";
+
+    const urun =
+        urunler.find(
+            x => x.id === id
+        );
+
+    if(urun){
+
+        const eskiYorum =
+            urun.yorumSayisi || 0;
+
+        const eskiPuan =
+            urun.puan || 4.7;
+
+        urun.puan =
+            Number(
+                (
+                    (
+                        eskiPuan * eskiYorum
+                    )
+                    +
+                    puan
+                )
+                /
+                (eskiYorum + 1)
+            ).toFixed(1);
+
+        urun.yorumSayisi =
+            eskiYorum + 1;
+
+    }
+
+    yorumlariGoster(urun);
+
+    urunleriGoster();
+
+    bildirim(
+        "⭐ Yorumun eklendi."
+    );
+
+}
+
+
+/* =====================================================
+   SEPETE EKLE
+===================================================== */
+
+function sepeteEkle(id){
+
+    const urun =
+        urunler.find(
+            x => x.id === id
+        );
+
+    if(!urun){
+        return;
+    }
+
+    const mevcut =
+        sepet.find(
+            item => item.id === id
+        );
+
+    if(mevcut){
+
+        mevcut.adet++;
+
+    }else{
+
+        sepet.push({
+
+            id:id,
+
+            adet:1
+
+        });
+
+    }
+
+    kaydet();
+
+    sepetiGoster();
+
+    sonuc.textContent =
+        "🛒 " +
+        urun.ad +
+        " sepete eklendi.";
+
+    bildirim(
+        "🛒 Ürün sepete eklendi."
+    );
+
+}
+
+
+/* =====================================================
+   SEPET
+===================================================== */
+
+function sepetiGoster(){
+
+    sepetListesi.innerHTML = "";
+
+    let toplam = 0;
+
+    let toplamAdet = 0;
+
+    if(sepet.length === 0){
+
+        sepetSayisi.textContent =
+            "Sepetiniz boş.";
+
+        sepetToplam.textContent =
+            "0 TL";
+
+        ustSepetSayisi.textContent =
+            "0";
+
+        return;
+
+    }
+
+    sepet.forEach(
+        (item,index) => {
+
+            const urun =
+                urunler.find(
+                    x => x.id === item.id
+                );
+
+            if(!urun){
+                return;
+            }
+
+            const adet =
+                item.adet;
+
+            const urunToplam =
+                urun.fiyat * adet;
+
+            toplam +=
+                urunToplam;
+
+            toplamAdet +=
+                adet;
+
+            const satir =
+                document.createElement("div");
+
+            satir.className =
+                "sepet-urun";
+
+            satir.innerHTML = `
+
+                <div>
+
+                    <strong>
+                        ${urun.ad}
+                    </strong>
+
+                    <div
+                        style="
+                            color:#777;
+                            font-size:13px;
+                            margin-top:5px;
+                        "
+                    >
+                        ${urun.fiyat.toLocaleString("tr-TR")} TL / adet
+                    </div>
+
+                </div>
+
+                <div class="adet-kontrol">
+
+                    <button
+                        class="adet-btn"
+                        onclick="adetAzalt(${index})"
+                    >
+                        −
+                    </button>
+
+                    <strong class="adet-sayi">
+                        ${adet}
+                    </strong>
+
+                    <button
+                        class="adet-btn"
+                        onclick="adetArtir(${index})"
+                    >
+                        +
+                    </button>
+
+                    <strong>
+                        ${urunToplam.toLocaleString("tr-TR")} TL
+                    </strong>
+
+                    <button
+                        class="sil-btn"
+                        onclick="sepettenSil(${index})"
+                    >
+                        Sil
+                    </button>
+
+                </div>
+
+            `;
+
+            sepetListesi.appendChild(
+                satir
+            );
+
+        }
+    );
+
+    sepetSayisi.textContent =
+        "Sepette " +
+        toplamAdet +
+        " ürün var.";
+
+    ustSepetSayisi.textContent =
+        toplamAdet;
+
+    sepetToplam.textContent =
+        toplam.toLocaleString("tr-TR") +
+        " TL";
+
+}
+
+
+/* =====================================================
+   ADET
+===================================================== */
+
+function adetArtir(index){
+
+    if(!sepet[index]){
+        return;
+    }
+
+    sepet[index].adet++;
+
+    kaydet();
+
+    sepetiGoster();
+
+}
+
+
+function adetAzalt(index){
+
+    if(!sepet[index]){
+        return;
+    }
+
+    if(sepet[index].adet > 1){
+
+        sepet[index].adet--;
+
+    }else{
+
+        sepet.splice(index,1);
+
+    }
+
+    kaydet();
+
+    sepetiGoster();
+
+}
+
+
+function sepettenSil(index){
+
+    sepet.splice(index,1);
+
+    kaydet();
+
+    sepetiGoster();
+
+    bildirim(
+        "Ürün sepetten çıkarıldı."
+    );
+
+}
+
+
+/* =====================================================
+   FAVORİ
+===================================================== */
+
+function favoriyeEkle(id){
+
+    const urun =
+        urunler.find(
+            x => x.id === id
+        );
+
+    if(!urun){
+        return;
+    }
+
+    if(
+        favoriIdleri.includes(id)
+    ){
+
+        favoriIdleri =
+            favoriIdleri.filter(
+                x => x !== id
+            );
+
+        bildirim(
+            "Favorilerden çıkarıldı."
+        );
+
+    }else{
+
+        favoriIdleri.push(id);
+
+        bildirim(
+            "❤️ Favorilere eklendi."
+        );
+
+    }
+
+    kaydet();
+
+    favoriSayisi.textContent =
+        favoriIdleri.length;
+
+    favorileriGoster();
+
+    urunleriGoster();
+
+}
+
+
+function favorileriGoster(){
+
+    const alan =
+        document.getElementById(
+            "favoriUrunleri"
+        );
+
+    const sayi =
+        document.getElementById(
+            "favoriUrunSayisi"
+        );
+
+    const favoriler =
+        favoriIdleri
+            .map(
+                id =>
+                    urunler.find(
+                        x => x.id === id
+                    )
+            )
+            .filter(Boolean);
+
+    sayi.textContent =
+        favoriler.length +
+        " ürün";
+
+    alan.innerHTML = "";
+
+    if(favoriler.length === 0){
+
+        alan.innerHTML = `
+
+            <div
+                style="
+                    grid-column:1/-1;
+                    text-align:center;
+                    padding:40px;
+                    color:#777;
+                "
+            >
+
+                ❤️ Henüz favori ürünün yok.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    favoriler.forEach(
+        urun => {
+
+            alan.appendChild(
+                urunKartiOlustur(urun)
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ARAMA
+===================================================== */
+
+function ara(){
+
+    const kelime =
+        arama.value
+            .toLocaleLowerCase("tr-TR")
+            .trim();
+
+    if(!kelime){
+
+        urunleriGoster();
+
+        return;
+
+    }
+
+    const filtre =
+        urunler.filter(
+            urun =>
+
+                urun.ad
+                    .toLocaleLowerCase("tr-TR")
+                    .includes(kelime)
+
+                ||
+
+                urun.kategori
+                    .toLocaleLowerCase("tr-TR")
+                    .includes(kelime)
+
+                ||
+
+                urun.aciklama
+                    .toLocaleLowerCase("tr-TR")
+                    .includes(kelime)
+
+        );
+
+    urunleriGoster(filtre);
+
+    document
+        .getElementById("urunler")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+document
+    .getElementById("aramaButonu")
+    .addEventListener(
+        "click",
+        ara
+    );
+
+
+arama.addEventListener(
+    "keydown",
+    e => {
+
+        if(e.key === "Enter"){
+
+            ara();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   KATEGORİLER
+===================================================== */
+
+function kategoriSec(kategori){
+
+    document
+        .querySelectorAll(".kategori")
+        .forEach(btn => {
+
+            btn.classList.remove("aktif");
+
+            if(
+                btn.dataset.kategori === kategori
+            ){
+
+                btn.classList.add("aktif");
+
+            }
+
+        });
+
+    if(kategori === "Tüm Ürünler"){
+
+        urunleriGoster();
+
+    }else{
+
+        urunleriGoster(
+
+            urunler.filter(
+                urun =>
+                    urun.kategori === kategori
+            )
+
+        );
+
+    }
+
+    document
+        .getElementById("urunler")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+document
+    .querySelectorAll("[data-kategori]")
+    .forEach(btn => {
+
+        btn.addEventListener(
+            "click",
+            () => {
+
+                kategoriSec(
+                    btn.dataset.kategori
+                );
+
+            }
+        );
+
+    });
+
+
+/* =====================================================
+   SHOPZA AI
+===================================================== */
+
+function aiAra(){
+
+    const istek =
+        document
+            .getElementById("istek")
+            .value
+            .toLocaleLowerCase("tr-TR")
+            .trim();
+
+    if(!istek){
+
+        sonuc.textContent =
+            "✨ Ne aradığını yaz.";
+
+        return;
+
+    }
+
+    let bulunan =
+        [...urunler];
+
+
+    /* =========================
+       BÜTÇE
+    ========================= */
+
+    let maksimum = null;
+
+    const butce =
+        istek.match(
+            /(\d[\d.]*)\s*(tl|₺)/i
+        );
+
+    if(butce){
+
+        maksimum =
+            Number(
+                butce[1]
+                    .replace(/\./g,"")
+            );
+
+    }
+
+    /* 2 bin / 2bin gibi ifadeler */
+
+    const binButce =
+        istek.match(
+            /(\d+(?:[.,]\d+)?)\s*bin/i
+        );
+
+    if(binButce){
+
+        maksimum =
+            Number(
+                binButce[1]
+                    .replace(",",".")
+            ) * 1000;
+
+    }
+
+    if(maksimum !== null){
+
+        bulunan =
+            bulunan.filter(
+                urun =>
+                    urun.fiyat <= maksimum
+            );
+
+    }
+
+
+    /* =========================
+       KATEGORİ SİNYALLERİ
+    ========================= */
+
+    const kelimeler = {
+
+        "bilgisayar":"Bilgisayar & Teknoloji",
+        "laptop":"Bilgisayar & Teknoloji",
+        "notebook":"Bilgisayar & Teknoloji",
+        "monitör":"Bilgisayar & Teknoloji",
+        "monitor":"Bilgisayar & Teknoloji",
+        "klavye":"Bilgisayar & Teknoloji",
+        "mouse":"Bilgisayar & Teknoloji",
+        "webcam":"Bilgisayar & Teknoloji",
+
+        "elektronik":"Elektronik",
+        "telefon":"Elektronik",
+        "kulaklık":"Elektronik",
+        "kulaklik":"Elektronik",
+        "şarj":"Elektronik",
+        "sarj":"Elektronik",
+
+        "oyun":"Oyun",
+        "gamepad":"Oyun",
+        "oyuncu":"Oyun",
+
+        "kozmetik":"Kozmetik",
+        "parfüm":"Kozmetik",
+        "parfum":"Kozmetik",
+        "makyaj":"Kozmetik",
+        "cilt":"Kozmetik",
+        "bakım":"Kozmetik",
+        "bakim":"Kozmetik",
+
+        "kadın":"Kadın",
+        "kadin":"Kadın",
+        "elbise":"Kadın",
+        "tişört":"Kadın",
+        "tisort":"Kadın",
+
+        "erkek":"Erkek",
+        "gömlek":"Erkek",
+        "gomlek":"Erkek",
+
+        "çocuk":"Çocuk & Bebek",
+        "cocuk":"Çocuk & Bebek",
+        "bebek":"Çocuk & Bebek",
+
+        "ayakkabı":"Ayakkabı & Çanta",
+        "ayakkabi":"Ayakkabı & Çanta",
+        "çanta":"Ayakkabı & Çanta",
+        "canta":"Ayakkabı & Çanta",
+
+        "takı":"Takı & Aksesuar",
+        "taki":"Takı & Aksesuar",
+        "kolye":"Takı & Aksesuar",
+        "bileklik":"Takı & Aksesuar",
+
+        "spor":"Spor & Outdoor",
+        "yoga":"Spor & Outdoor",
+        "fitness":"Spor & Outdoor",
+
+        "kitap":"Kitap & Kırtasiye",
+        "roman":"Kitap & Kırtasiye",
+        "kırtasiye":"Kitap & Kırtasiye",
+        "kirtasiye":"Kitap & Kırtasiye",
+
+        "kedi":"Evcil Hayvan",
+        "köpek":"Evcil Hayvan",
+        "kopek":"Evcil Hayvan",
+
+        "araba":"Otomotiv",
+        "otomobil":"Otomotiv",
+        "araç":"Otomotiv",
+        "arac":"Otomotiv",
+
+        "hediye":"Hediyelik",
+        "hediyelik":"Hediyelik",
+        "sevgili":"Hediyelik",
+        "sevgilime":"Hediyelik",
+        "romantik":"Hediyelik",
+        "doğum günü":"Hediyelik",
+        "dogum gunu":"Hediyelik",
+
+        "salon":"Ev & Yaşam",
+        "oturma odası":"Ev & Yaşam",
+        "oturma odasi":"Ev & Yaşam",
+        "oda":"Ev & Yaşam",
+        "ev":"Ev & Yaşam",
+        "evim":"Ev & Yaşam",
+        "dekorasyon":"Ev & Yaşam",
+        "dekor":"Ev & Yaşam",
+        "mobilya":"Ev & Yaşam",
+        "masa":"Ev & Yaşam",
+        "lamba":"Ev & Yaşam"
+
+    };
+
+
+    let kategori =
+        null;
+
+    for(
+        const kelime in kelimeler
+    ){
+
+        if(
+            istek.includes(kelime)
+        ){
+
+            kategori =
+                kelimeler[kelime];
+
+            break;
+
+        }
+
+    }
+
+
+    if(kategori){
+
+        bulunan =
+            bulunan.filter(
+                urun =>
+                    urun.kategori === kategori
+            );
+
+    }
+
+
+    /* =========================
+       EK SÖZCÜK FİLTRELERİ
+    ========================= */
+
+    const dusukFiyat =
+        istek.includes("ucuz") ||
+        istek.includes("uygun fiyat");
+
+    if(dusukFiyat){
+
+        bulunan.sort(
+            (a,b) =>
+                a.fiyat - b.fiyat
+        );
+
+    }
+
+
+    const puanli =
+        istek.includes("en iyi") ||
+        istek.includes("iyi") ||
+        istek.includes("kaliteli");
+
+    if(puanli){
+
+        bulunan.sort(
+            (a,b) =>
+                (b.puan || 0) -
+                (a.puan || 0)
+        );
+
+    }
+
+
+    /* =========================
+       SONUÇ
+    ========================= */
+
+    urunleriGoster(bulunan);
+
+    if(bulunan.length === 0){
+
+        sonuc.textContent =
+            "😔 Bu kriterlere uygun ürün bulamadım.";
+
+    }else{
+
+        let mesaj =
+            bulunan.length +
+            " uygun ürün buldum ✨";
+
+        if(maksimum !== null){
+
+            mesaj +=
+                " Bütçene göre filtreledim.";
+
+        }
+
+        sonuc.textContent =
+            mesaj;
+
+    }
+
+
+    urunlerKutusu.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+document
+    .getElementById("olustur")
+    .addEventListener(
+        "click",
+        aiAra
+    );
+
+
+document
+    .getElementById("istek")
+    .addEventListener(
+        "keydown",
+        e => {
+
+            if(e.key === "Enter"){
+
+                aiAra();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+document
+    .getElementById("heroSor")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("aiBolumu")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            document
+                .getElementById("istek")
+                .focus();
+
+        }
+    );
+
+
+/* =====================================================
+   HESAP MODALI
+===================================================== */
+
+function hesapAc(){
+
+    document
+        .getElementById("hesapModal")
+        .classList.add("acik");
+
+}
+
+
+function hesapModalKapat(){
+
+    document
+        .getElementById("hesapModal")
+        .classList.remove("acik");
+
+}
+
+
+function hesapSekmeAc(tip){
+
+    const girisFormu =
+        document.getElementById("girisFormu");
+
+    const kayitFormu =
+        document.getElementById("kayitFormu");
+
+    const girisSekme =
+        document.getElementById("girisSekme");
+
+    const kayitSekme =
+        document.getElementById("kayitSekme");
+
+
+    if(tip === "giris"){
+
+        girisFormu.classList.add("aktif");
+        kayitFormu.classList.remove("aktif");
+
+        girisSekme.classList.add("aktif");
+        kayitSekme.classList.remove("aktif");
+
+    }else{
+
+        girisFormu.classList.remove("aktif");
+        kayitFormu.classList.add("aktif");
+
+        girisSekme.classList.remove("aktif");
+        kayitSekme.classList.add("aktif");
+
+    }
+
+}
+
+
+document
+    .getElementById("hesapButonu")
+    .addEventListener(
+        "click",
+        hesapAc
+    );
+
+
+
+/* =====================================================
+   KAYIT
+===================================================== */
+
+document
+    .getElementById("kayitBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            const ad =
+                document
+                    .getElementById("kayitAd")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("kayitEmail")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const sifre =
+                document
+                    .getElementById("kayitSifre")
+                    .value;
+
+            if(!ad || !email || !sifre){
+
+                bildirim(
+                    "Tüm alanları doldur."
+                );
+
+                return;
+
+            }
+
+            const mevcut =
+                kullanicilar.find(
+                    x =>
+                        x.email === email
+                );
+
+            if(mevcut){
+
+                bildirim(
+                    "Bu e-posta zaten kayıtlı."
+                );
+
+                return;
+
+            }
+
+            kullanicilar.push({
+
+                id:
+                    "u_" +
+                    Date.now(),
+
+                ad:ad,
+
+                email:email,
+
+                sifre:sifre
+
+            });
+
+            kaydet();
+
+            document
+                .getElementById("kayitAd")
+                .value = "";
+
+            document
+                .getElementById("kayitEmail")
+                .value = "";
+
+            document
+                .getElementById("kayitSifre")
+                .value = "";
+
+            bildirim(
+                "✅ Hesabın oluşturuldu. Şimdi giriş yapabilirsin."
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   GİRİŞ
+===================================================== */
+
+document
+    .getElementById("girisBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            const email =
+                document
+                    .getElementById("girisEmail")
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+            const sifre =
+                document
+                    .getElementById("girisSifre")
+                    .value;
+
+            const kullanici =
+                kullanicilar.find(
+                    x =>
+                        x.email === email &&
+                        x.sifre === sifre
+                );
+
+            if(!kullanici){
+
+                bildirim(
+                    "E-posta veya şifre hatalı."
+                );
+
+                return;
+
+            }
+
+            aktifKullanici =
+                kullanici;
+
+            localStorage.setItem(
+                "shopzaAktifKullanici",
+                JSON.stringify(
+                    aktifKullanici
+                )
+            );
+
+            hesapDurumunuGoster();
+
+            bildirim(
+                "👋 Hoş geldin " +
+                kullanici.ad
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   HESAP DURUMU
+===================================================== */
+
+function hesapDurumunuGoster(){
+
+    const durum =
+        document.getElementById(
+            "oturumDurumu"
+        );
+
+    const bilgiler =
+        document.getElementById(
+            "hesapBilgileri"
+        );
+
+    function hesapDurumunuGoster(){
+
+    const durum =
+        document.getElementById("oturumDurumu");
+
+    const bilgiler =
+        document.getElementById("hesapBilgileri");
+
+    if(!durum || !bilgiler){
+        return;
+    }
+
+    if(!aktifKullanici){
+
+        return;
+
+    }
+
+    durum.textContent =
+        "👋 " + aktifKullanici.ad;
+
+}
+
+    durum.textContent =
+        "👋 " +
+        aktifKullanici.ad;
+
+    bilgiler.innerHTML = `
+
+        <div
+            class="hesap-kutu"
+        >
+
+            <strong>
+                ${aktifKullanici.ad}
+            </strong>
+
+            <p
+                style="
+                    color:#777;
+                    margin-top:5px;
+                "
+            >
+                ${aktifKullanici.email}
+            </p>
+
+            <button
+                class="pembe-btn"
+                style="margin-top:12px"
+                onclick="cikisYap()"
+            >
+                Çıkış Yap
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+function cikisYap(){
+
+    aktifKullanici =
+        null;
+
+    localStorage.removeItem(
+        "shopzaAktifKullanici"
+    );
+
+    hesapDurumunuGoster();
+
+    bildirim(
+        "Çıkış yapıldı."
+    );
+
+}
+
+
+/* =====================================================
+   SİPARİŞLER
+===================================================== */
+
+function siparisleriGoster(){
+
+    const alan =
+        document.getElementById(
+            "siparisListesi"
+        );
+
+    const sayi =
+        document.getElementById(
+            "siparisSayisi"
+        );
+
+    if(!aktifKullanici){
+
+        sayi.textContent =
+            "Giriş yapmalısın";
+
+        alan.innerHTML = `
+
+            <div
+                style="
+                    padding:30px;
+                    text-align:center;
+                    color:#777;
+                "
+            >
+
+                📋 Siparişlerini görmek için
+                hesabına giriş yap.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const benimSiparislerim =
+        siparisler.filter(
+            x =>
+                x.kullaniciId ===
+                aktifKullanici.id
+        );
+
+    sayi.textContent =
+        benimSiparislerim.length +
+        " sipariş";
+
+    alan.innerHTML = "";
+
+    if(benimSiparislerim.length === 0){
+
+        alan.innerHTML = `
+
+            <div
+                style="
+                    padding:30px;
+                    text-align:center;
+                    color:#777;
+                "
+            >
+
+                Henüz siparişin yok.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    benimSiparislerim
+        .slice()
+        .reverse()
+        .forEach(
+            siparis => {
+
+                const kart =
+                    document.createElement(
+                        "div"
+                    );
+
+                kart.className =
+                    "siparis-karti";
+
+                const durumIndex =
+                    siparis.durum === "Hazırlanıyor"
+                    ? 1
+                    :
+                    siparis.durum === "Kargoda"
+                    ? 2
+                    :
+                    siparis.durum === "Teslim Edildi"
+                    ? 3
+                    :
+                    0;
+
+                kart.innerHTML = `
+
+                    <div class="siparis-baslik">
+
+                        <strong>
+                            Sipariş #${siparis.id}
+                        </strong>
+
+                        <span class="durum">
+                            ${siparis.durum}
+                        </span>
+
+                    </div>
+
+                    <div style="color:#777;font-size:13px">
+                        ${siparis.tarih}
+                    </div>
+
+                    <div style="margin-top:10px">
+
+                        ${siparis.urunler
+                            .map(
+                                x =>
+                                    `${x.ad} x ${x.adet}`
+                            )
+                            .join("<br>")
+                        }
+
+                    </div>
+
+                    <strong
+                        style="
+                            display:block;
+                            margin-top:12px;
+                        "
+                    >
+                        ${siparis.toplam.toLocaleString("tr-TR")} TL
+                    </strong>
+
+                    <div class="kargo-takip">
+
+                        🚚 Kargo Durumu
+
+                        <div class="kargo-adimlari">
+
+                            <div class="kargo-adim aktif"></div>
+
+                            <div class="kargo-adim ${
+                                durumIndex >= 2
+                                ? "aktif"
+                                : ""
+                            }"></div>
+
+                            <div class="kargo-adim ${
+                                durumIndex >= 3
+                                ? "aktif"
+                                : ""
+                            }"></div>
+
+                            <div class="kargo-adim ${
+                                durumIndex >= 4
+                                ? "aktif"
+                                : ""
+                            }"></div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+                alan.appendChild(
+                    kart
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   DEMO SİPARİŞ OLUŞTURMA
+===================================================== */
+
+function demoSiparisOlustur(){
+
+    if(!aktifKullanici){
+
+        bildirim(
+            "Sipariş için giriş yapmalısın."
+        );
+
+        hesapAc();
+
+        return;
+
+    }
+
+    if(sepet.length === 0){
+
+        bildirim(
+            "Sepet boş."
+        );
+
+        return;
+
+    }
+
+    let toplam = 0;
+
+    const siparisUrunleri =
+        [];
+
+    sepet.forEach(
+        item => {
+
+            const urun =
+                urunler.find(
+                    x => x.id === item.id
+                );
+
+            if(!urun){
+                return;
+            }
+
+            toplam +=
+                urun.fiyat *
+                item.adet;
+
+            siparisUrunleri.push({
+
+                ad:urun.ad,
+
+                adet:item.adet,
+
+                fiyat:urun.fiyat,
+
+                kategori:urun.kategori
+
+            });
+
+        }
+    );
+
+    const yeniSiparis = {
+
+        id:
+            Math.floor(
+                100000 +
+                Math.random() *
+                900000
+            ),
+
+        kullaniciId:
+            aktifKullanici.id,
+
+        tarih:
+            new Date()
+                .toLocaleString(
+                    "tr-TR"
+                ),
+
+        toplam:toplam,
+
+        durum:"Hazırlanıyor",
+
+        urunler:siparisUrunleri
+
+    };
+
+    siparisler.push(
+        yeniSiparis
+    );
+
+    sepet = [];
+
+    kaydet();
+
+    sepetiGoster();
+
+    siparisleriGoster();
+
+    bildirim(
+        "📦 Demo sipariş oluşturuldu."
+    );
+
+}
+
+
+/* =====================================================
+   ÖDEME HAZIRLIK
+===================================================== */
+
+document
+    .getElementById("odemeHazirlikBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            if(sepet.length === 0){
+
+                bildirim(
+                    "Ödeme için sepetine ürün ekle."
+                );
+
+                return;
+
+            }
+
+            let toplam = 0;
+
+            sepet.forEach(
+                item => {
+
+                    const urun =
+                        urunler.find(
+                            x => x.id === item.id
+                        );
+
+                    if(urun){
+
+                        toplam +=
+                            urun.fiyat *
+                            item.adet;
+
+                    }
+
+                }
+            );
+
+            document
+                .getElementById("odemeToplam")
+                .textContent =
+                    toplam.toLocaleString(
+                        "tr-TR"
+                    ) +
+                    " TL";
+
+            document
+                .getElementById("odemeModal")
+                .classList.add("acik");
+
+        }
+    );
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function modalKapat(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("acik");
+
+}
+
+
+/* =====================================================
+   SATICI MERKEZİ
+===================================================== */
+
+document
+    .getElementById("saticiButonu")
+    .addEventListener(
+        "click",
+        () => {
+
+            const alan =
+                document.getElementById(
+                    "saticiMerkezi"
+                );
+
+            alan.classList.toggle(
+                "acik"
+            );
+
+            if(
+                alan.classList.contains("acik")
+            ){
+
+                alan.scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("saticiKapat")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "saticiMerkezi"
+                )
+                .classList.remove(
+                    "acik"
+                );
+
+        }
+    );
+
+
+/* =====================================================
+   SATICI ÜRÜN EKLE
+===================================================== */
+
+document
+    .getElementById("urunEkleBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            const ad =
+                document
+                    .getElementById(
+                        "yeniUrunAd"
+                    )
+                    .value
+                    .trim();
+
+            const fiyat =
+                Number(
+                    document
+                        .getElementById(
+                            "yeniUrunFiyat"
+                        )
+                        .value
+                );
+
+            const kategori =
+                document
+                    .getElementById(
+                        "yeniUrunKategori"
+                    )
+                    .value;
+
+            const resim =
+                document
+                    .getElementById(
+                        "yeniUrunResim"
+                    )
+                    .value
+                    .trim();
+
+            if(!ad || !fiyat){
+
+                bildirim(
+                    "Ürün adı ve fiyat gir."
+                );
+
+                return;
+
+            }
+
+            const yeniUrun = {
+
+                id:
+                    "seller_" +
+                    Date.now(),
+
+                ad:ad,
+
+                fiyat:fiyat,
+
+                kategori:kategori,
+
+                puan:4.7,
+
+                yorumSayisi:0,
+
+                indirim:10,
+
+                aciklama:
+                    "SHOPZA satıcısı tarafından eklenen ürün.",
+
+                resim:
+                    resim ||
+                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+
+            };
+
+            urunler.push(
+                yeniUrun
+            );
+
+            kayitliSaticiUrunleri.push(
+                yeniUrun
+            );
+
+            localStorage.setItem(
+                "shopzaSaticiUrunleri",
+                JSON.stringify(
+                    kayitliSaticiUrunleri
+                )
+            );
+
+            document
+                .getElementById(
+                    "yeniUrunAd"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "yeniUrunFiyat"
+                )
+                .value = "";
+
+            document
+                .getElementById(
+                    "yeniUrunResim"
+                )
+                .value = "";
+
+            urunleriGoster();
+
+            saticiUrunleriniGoster();
+
+            cokSatanlariGoster();
+
+            bildirim(
+                "✅ Ürün SHOPZA'ya eklendi."
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   SATICI ÜRÜNLERİ
+===================================================== */
+
+function saticiUrunleriniGoster(){
+
+    const alan =
+        document.getElementById(
+            "saticiUrunListesi"
+        );
+
+    alan.innerHTML = "";
+
+    if(
+        kayitliSaticiUrunleri.length === 0
+    ){
+
+        alan.innerHTML = `
+
+            <p
+                style="
+                    color:#777;
+                    margin-top:10px;
+                "
+            >
+                Henüz ürün eklenmedi.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+    kayitliSaticiUrunleri.forEach(
+        (urun,index) => {
+
+            const satir =
+                document.createElement(
+                    "div"
+                );
+
+            satir.className =
+                "satici-urun-satiri";
+
+            satir.innerHTML = `
+
+                <span>
+
+                    <strong>
+                        ${urun.ad}
+                    </strong>
+
+                    -
+                    ${urun.fiyat.toLocaleString("tr-TR")}
+                    TL
+
+                    <small
+                        style="
+                            color:#999;
+                            margin-left:8px;
+                        "
+                    >
+                        ${urun.kategori}
+                    </small>
+
+                </span>
+
+                <button
+                    class="satici-sil"
+                    onclick="saticiUrunSil(${index})"
+                >
+                    Sil
+                </button>
+
+            `;
+
+            alan.appendChild(
+                satir
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SATICI ÜRÜN SİL
+===================================================== */
+
+function saticiUrunSil(index){
+
+    const urun =
+        kayitliSaticiUrunleri[index];
+
+    kayitliSaticiUrunleri.splice(
+        index,
+        1
+    );
+
+    const urunIndex =
+        urunler.indexOf(
+            urun
+        );
+
+    if(urunIndex !== -1){
+
+        urunler.splice(
+            urunIndex,
+            1
+        );
+
+    }
+
+    localStorage.setItem(
+        "shopzaSaticiUrunleri",
+        JSON.stringify(
+            kayitliSaticiUrunleri
+        )
+    );
+
+    saticiUrunleriniGoster();
+
+    urunleriGoster();
+
+    cokSatanlariGoster();
+
+    bildirim(
+        "Ürün silindi."
+    );
+
+}
+
+
+/* =====================================================
+   ÇOK SATANLAR
+===================================================== */
+
+function cokSatanlariGoster(){
+
+    const liste =
+        [...urunler]
+            .sort(
+                (a,b) =>
+                    (b.puan || 0) -
+                    (a.puan || 0)
+            )
+            .slice(0,8);
+
+    cokSatanlarKutusu.innerHTML =
+        "";
+
+    liste.forEach(
+        urun => {
+
+            cokSatanlarKutusu.appendChild(
+                urunKartiOlustur(urun)
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   FAVORİ BUTONU
+===================================================== */
+
+document
+    .getElementById("favoriButonu")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "favorilerAlani"
+                )
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+        }
+    );
+
+
+/* =====================================================
+   SEPET BUTONU
+===================================================== */
+
+document
+    .getElementById("ustSepet")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("sepet")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+        }
+    );
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+document
+    .getElementById("logo")
+    .addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+            kategoriSec(
+                "Tüm Ürünler"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   SATICI İSTATİSTİKLERİ
+===================================================== */
+
+function saticiIstatistikleriniGoster(){
+
+    const toplamSatis =
+        siparisler.reduce(
+            (toplam,siparis) =>
+                toplam +
+                siparis.toplam,
+            0
+        );
+
+    const komisyon =
+        toplamSatis * 0.15;
+
+    const net =
+        toplamSatis - komisyon;
+
+    document
+        .getElementById(
+            "saticiSiparis"
+        )
+        .textContent =
+            siparisler.length;
+
+    document
+        .getElementById(
+            "saticiSatis"
+        )
+        .textContent =
+            toplamSatis.toLocaleString(
+                "tr-TR"
+            ) +
+            " TL";
+
+    document
+        .getElementById(
+            "saticiNet"
+        )
+        .textContent =
+            net.toLocaleString(
+                "tr-TR"
+            ) +
+            " TL";
+
+}
+
+
+/* =====================================================
+   BAŞLANGIÇ
+===================================================== */
+
+urunleriGoster();
+
+sepetiGoster();
+
+favorileriGoster();
+
+saticiUrunleriniGoster();
+
+cokSatanlariGoster();
+
+hesapDurumunuGoster();
+
+siparisleriGoster();
+
+saticiIstatistikleriniGoster();
+
+</script>
+
+</body>
+</html>
