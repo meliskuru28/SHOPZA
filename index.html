@@ -4363,7 +4363,7 @@ document
                 )
             );
 
-            hesapDurumunuGoster();
+
 
             bildirim(
                 "👋 Hoş geldin " +
@@ -4381,18 +4381,6 @@ document
 function hesapDurumunuGoster(){
 
     const durum =
-        document.getElementById(
-            "oturumDurumu"
-        );
-
-    const bilgiler =
-        document.getElementById(
-            "hesapBilgileri"
-        );
-
-    function hesapDurumunuGoster(){
-
-    const durum =
         document.getElementById("oturumDurumu");
 
     const bilgiler =
@@ -4404,27 +4392,35 @@ function hesapDurumunuGoster(){
 
     if(!aktifKullanici){
 
-        return;
+        durum.textContent =
+            "👤 Giriş yapılmadı";
 
+        bilgiler.innerHTML = `
+            <div class="hesap-kutu">
+                <strong>SHOPZA hesabına giriş yap</strong>
+                <p style="color:#777;margin-top:5px;">
+                    Siparişlerini ve hesabını görmek için giriş yapmalısın.
+                </p>
+            </div>
+        `;
+
+        return;
     }
 
-    durum.textContent =
-        "👋 " + aktifKullanici.ad;
+    const ad =
+        aktifKullanici.ad ||
+        aktifKullanici.user_metadata?.full_name ||
+        "SHOPZA Kullanıcısı";
 
-}
-
     durum.textContent =
-        "👋 " +
-        aktifKullanici.ad;
+        "👋 " + ad;
 
     bilgiler.innerHTML = `
 
-        <div
-            class="hesap-kutu"
-        >
+        <div class="hesap-kutu">
 
             <strong>
-                ${aktifKullanici.ad}
+                ${ad}
             </strong>
 
             <p
@@ -4449,6 +4445,8 @@ function hesapDurumunuGoster(){
     `;
 
 }
+
+ 
 
 
 function cikisYap(){
